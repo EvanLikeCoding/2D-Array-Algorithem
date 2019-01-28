@@ -1,0 +1,26 @@
+ /**
+     * This method is used to find most common number and count for common
+     * number
+     *
+     * @param data
+     * @param numberOfRow
+     * @param numberOfCol
+     * @return array{commonNum,count}
+     */
+    public static int[] findCommon(int[][] data, int numberOfRow, int numberOfCol) {
+        int[] temp = new int[numberOfRow * numberOfCol]; // set a temp array to hold big data set
+        for (int[] data1 : data) {
+            for (int col = 0; col < data1.length; col++) {
+                temp[data1[col]]++; // go through the loop temp will increase
+            }
+        }
+        int count = temp[0];  // set count as 0
+        int value = 0;
+        for (int i = 0; i < temp.length; i++) { // go through single temp array check every rows
+            if (temp[i] >= count) {  // if greater than 0 swap value
+                count = temp[i];
+                value = i;
+            }
+        }
+        return new int[]{value, count}; // return the count and value
+    }
