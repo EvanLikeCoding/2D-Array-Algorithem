@@ -1,0 +1,25 @@
+   /**
+     * This method is used to find how many times occur of lowest value in array
+     *
+     * @param x
+     * @return times of lowest number
+     */
+    public static int[] FindLowestValueTimes(int[][] x) {
+        int lowestValue = x[0][0];  // set lowest value initial as first value in arrays
+        int lowCount = 0;  // set occurs time as 0
+        for (int[] x1 : x) {
+            // loop it using brutal force check every value
+            for (int col = 0; col < x1.length; col++) {
+                if (x1[col] < lowestValue) {
+                    // if value less than inital value
+                    lowestValue = x1[col]; // then lowest value change to find lowest value
+                    lowCount = 0; // once it finds lowest value initial count as 0
+                }
+                if (x1[col] == lowestValue) {
+                    // continue go through array if still has value same as lowest value
+                    lowCount++; // then count ++
+                }
+            }
+        }
+        return new int[]{lowestValue, lowCount};        // return new array contains these two values
+    }
