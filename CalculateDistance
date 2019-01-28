@@ -1,0 +1,25 @@
+ /**
+     * This method is finding closest distance between peaks
+     *
+     * @param peaks
+     * @return distance
+     */
+    public static double findDis(Peak[] peaks) {
+        double distance = 0;    // initialize a distance as 0
+        double temp = 0;    // initialize temp number to hold
+        for (int i = 0; i < peaks.length - 1; i++) {
+            for (int j = i + 1; j < peaks.length; j++) {
+                double r1 = peaks[0].row - peaks[1].row;    // create a variable to store first peak row
+                double c1 = peaks[0].col - peaks[1].col;    // create a variable to store first peak col
+                double rx = peaks[i].row - peaks[j].row;    // create a variable to store peak row
+                double cy = peaks[i].col - peaks[j].col;    // create a variable to store peak col
+                distance = Math.sqrt(r1 * r1 + c1 * c1);    // caculate distance for the first two peaks
+                temp = Math.sqrt(rx * rx + cy * cy);    // then caculate rest peaks distance
+                if (temp <= distance) { // if this number smaller than distance then is smallest distance
+                    distance = temp;
+                }
+            }
+        }
+
+        return distance;
+    }
