@@ -1,0 +1,34 @@
+ /**
+     * This method does find peak in large data set 
+     *
+     * @param data
+     * @param numberOfRow
+     * @param numberOfCol
+     * @param radius
+     * @return Peak[] peaks
+     */
+    public static Peak[] findPeak(int[][] data, int numberOfRow, int numberOfCol, int radius) {
+        Peak[] peaks = new Peak[numberOfRow * numberOfCol];   // Create peak object array to store peaks
+        int numberOfPeak = 0;   // initialize number of peak
+        for (int row = radius; row < numberOfRow - radius; row++) {
+            for (int col = radius; col < numberOfCol - radius; col++) {
+                if (data[row][col] > 94850) {   // first loop narrow down into radius range and only check number greater than 94850
+                    boolean findPeak = true;    // if is true peak found
+                    int peak = data[row][col];  // and set peak
+                    for (int i = row - radius; i <= row + radius && findPeak; i++) {
+                        for (int j = col - radius; j <= col + radius && findPeak; j++) {    // inside second loop check number around peak accroding by radius                          
+                            if ((i != row && j != col) && data[i][j] >= data[row][col]) {   // if number around peak greater than that peak                                   
+                                findPeak = false;   // then turn into false
+                            }
+                        }
+                    }
+                    if (findPeak) {
+                        peaks[numberOfPeak++] = new Peak(row, col, peak); //if peak found then create peaks as array
+                    }
+                }
+
+            }
+        }
+        peaks = Arrays.copyOf(peaks, numberOfPeak);     // cut array size down as peaks count
+        return peaks;
+    }
